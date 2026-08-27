@@ -8,5 +8,21 @@
 </head>
 <body>
     <h1>Index</h1>
+    
+    <h2>Upload File</h2>
+    <form action="/api/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="avatar" class="border">
+        <button class="border" type="submit">Upload File</button>
+    </form>
+
+    <h3>All Images</h3>
+
+    <div class="flex gap-2">
+        <% images.map((image, index) => { %>
+            <div class="avatar-circle">
+                <img class="avatar-image" src="../<%= image.path %>" alt="">
+            </div>
+        <% }) %>
+    </div>
 </body>
 </html>
