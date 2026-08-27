@@ -18,3 +18,18 @@
 a {
     text-decoration: underline;
 }
+
+button {
+    border: 1px solid black;
+    padding: 0.25rem 1rem;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+input {
+    border: 1px solid black;
+}

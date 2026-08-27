@@ -168,6 +168,9 @@
   .w-fit {
     width: fit-content;
   }
+  .max-w-\[16rem\] {
+    max-width: 16rem;
+  }
   .flex-col {
     flex-direction: column;
   }
@@ -194,6 +197,18 @@
 }
 a {
   text-decoration: underline;
+}
+button {
+  border: 1px solid black;
+  padding: 0.25rem 1rem;
+}
+button:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+input {
+  border: 1px solid black;
 }
 @property --tw-border-style {
   syntax: "*";
