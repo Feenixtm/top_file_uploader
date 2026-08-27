@@ -165,6 +165,9 @@
   .flex {
     display: flex;
   }
+  .w-fit {
+    width: fit-content;
+  }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
   }
