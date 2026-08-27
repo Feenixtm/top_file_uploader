@@ -1,6 +1,6 @@
 import { prisma } from "../lib/prisma.js";
 
-export const getViewIndex = async (req, res, next) => {
+export const getIndex = async (req, res, next) => {
     try {
         const images = await prisma.file.findMany();
         // console.log(images);
@@ -8,4 +8,12 @@ export const getViewIndex = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+}
+
+export const getLogin = (req, res) => {
+    res.render("login");
+}
+
+export const getSignUp = (req, res) => {
+    res.render("sign-up");
 }
