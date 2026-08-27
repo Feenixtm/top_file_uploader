@@ -14,3 +14,7 @@
     object-fit: cover;
     object-position: center;
 }
+
+a {
+    text-decoration: underline;
+}

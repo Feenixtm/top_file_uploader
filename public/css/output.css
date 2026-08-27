@@ -168,6 +168,9 @@
   .w-fit {
     width: fit-content;
   }
+  .flex-col {
+    flex-direction: column;
+  }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
   }
@@ -188,6 +191,9 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+a {
+  text-decoration: underline;
 }
 @property --tw-border-style {
   syntax: "*";
