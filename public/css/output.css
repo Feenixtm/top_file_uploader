@@ -197,6 +197,7 @@
 }
 a {
   text-decoration: underline;
+  width: fit-content;
 }
 button {
   border: 1px solid black;

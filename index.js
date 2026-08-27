@@ -5,9 +5,11 @@ dotenv.config();
 import session from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { prisma } from "./lib/prisma.js";
+import passport from "passport";
 
 import apiRouter from "./routes/apiRoutes.js";
 import viewRouter from "./routes/viewRoutes.js";
+import authRouter from "./routes/authRoutes.js";
 
 const app = express();
 
@@ -40,8 +42,13 @@ app.use(
         )
     })
 )
+app.use(passport.session());
+app.use(express.urlencoded({ extended: false }));
+
+import "./config/passport.js";
 
 app.use("/", viewRouter);
+app.use("/", authRouter);
 app.use("/api", apiRouter);
 
 const PORT = process.env.PORT || 5051;

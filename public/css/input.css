@@ -17,6 +17,7 @@
 
 a {
     text-decoration: underline;
+    width: fit-content;
 }
 
 button {

@@ -4,7 +4,7 @@ export const getIndex = async (req, res, next) => {
     try {
         const images = await prisma.file.findMany();
         // console.log(images);
-        res.render("index", { images: images });
+        res.render("index", { user: req.user, images: images });
     } catch (error) {
         next(error);
     }

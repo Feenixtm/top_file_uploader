@@ -1,4 +1,4 @@
-import express, { application } from "express";
+import express from "express";
 import multer from "multer";
 const upload = multer({ dest: "uploads/"});
 import { prisma } from "../lib/prisma.js";
