@@ -8,9 +8,17 @@ export const deleteFile = async (req, res, next) => {
             where: {
                 id: cuid
             }
-        })
+        });
 
         res.redirect("/");
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const createFolder = async (req, res, next) => {
+    try {
+        
     } catch (error) {
         next(error);
     }

@@ -33,4 +33,15 @@ model File {
   size Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  folderId String
+  folder Folder @relation(fields: [folderId], references: [id], onDelete: Cascade)
+}
+
+model Folder {
+  id String @id @default(cuid())
+  name String @unique
+  parentId String?
+  parent Folder? @relation("FolderToFolder", fields: [parentId], references: [id], onDelete: Cascade)
+  children Folder[] @relation("FolderToFolder")
+  files File[]
 }
