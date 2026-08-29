@@ -7,41 +7,93 @@
     <link rel="stylesheet" href="/css/output.css">
 </head>
 <body>
-    <h1>Home</h1>
-
-    <% if (locals.user) { %>
-        <p>Welcome back <%= user.username %></p>
-    <% } %>
-    
-    <div class="flex flex-col">
-        <a href="/sign-up">Sign Up</a>
-        <a href="/login">Login</a>
+    <header class="flex justify-between items-center px-4 md:px-8 py-2 bg-blue-200">
+        <a href="/">Home</a>
 
         <% if (locals.user) { %>
             <a href="/log-out">Log Out</a>
+        <% } else { %>
+            <div class="flex gap-4">
+                <a href="/sign-up">Sign Up</a>
+                <a href="/login">Login</a>
+            </div>
         <% } %> 
-    </div>
-    
+    </header>
 
-    <% if (locals.user) { %>
-        <h2>Upload File</h2>
-        <form action="/api/upload" method="POST" enctype="multipart/form-data">
-            <input type="file" name="avatar" class="border w-fit">
-            <button class="border" type="submit">Upload File</button>
-        </form>
+    <main class="flex flex-col gap-4 min-h-[calc(100vh-2.5rem)] p-4 md:px-8 bg-blue-100">
 
-        <h3>All Images</h3>
+        <% if (locals.user) { %>
+            <p class="italic text-[1.5rem]">Welcome back <%= user.username %></p>
 
-        <div class="flex gap-2">
-            <% images.map((image, index) => { %>
-                <div class="avatar-circle">
-                    <img class="avatar-image" src="../<%= image.path %>" alt="">
+            <div class="flex flex-col gap-4 p-4 bg-blue-200">
+                <h3 class="text-[1.25rem]">/</h3>
+
+                <div class="flex flex-wrap gap-4 px-4">
+                    <% files.map((file, index) => { %>
+                        <div class="flex flex-col gap-2 px-2 pt-3 pb-4 border bg-white">
+                            
+                            <% if (file.mimetype.includes("image")) { %>
+                                <div class="avatar-circle">
+                                    <img class="avatar-image" src="../<%= file.path %>" alt="">
+                                </div>
+                            <% } %> 
+
+                            <% if (file.mimetype.includes("text")) { %>
+                                <svg width="94px" height="94px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V9M13 3L19 9M13 3V8C13 8.55228 13.4477 9 14 9H19M9 13H15M9 17H15" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            <% } %> 
+
+                            <a href="/file/<%= file.id %>">View Details</a>
+                            
+                            <form action="/api/delete/<%= file.id %>" method="POST">
+                                <button class="text-[0.75rem]" type="submit">DELETE FILE</button>
+                            </form>
+                        </div>
+                    <% }) %>
                 </div>
-            <% }) %>
-        </div>
-    <% } else { %>
+            </div>
 
-    <% } %>
+            <div class="flex flex-col gap-1 p-4 bg-blue-200">
+                <h2>Upload File to '/'</h2>
+                <div class="flex justify-between">
+                    <form action="/api/upload" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="avatar" class="file-input border px-4 py-1 w-fit">
+                        <button class="border" type="submit">Upload File</button>
+                    </form>
+                    
+                    <button id="toggle-hidden-div-btn" class="w-fit">Add Folder +</button>
+                </div>
+            </div>
+
+            
+
+            <div id="hidden-div" class="p-4 bg-blue-200" style="display: none;">
+                <form class="p-4 border flex justify-between  gap-2  w-full" action="/create-folder" method="POST">
+                    <div class="flex gap-2 items-center">
+                        <label for="">Folder Name:</label>
+                        <input type="text" class="py-1">
+                    </div>
+
+                    <button type="submit">Create Folder</button>
+                </form>
+            </div>
+
+        <% } else { %>
+
+        <% } %>
+    </main>
     
+    <script>
+        const btn = document.querySelector("#toggle-hidden-div-btn");
+        const hiddenDiv = document.querySelector("#hidden-div");
+        btn.addEventListener("click", function() {
+            if (hiddenDiv.style.display === "none") {
+                hiddenDiv.style.display = "block";
+            } else {
+                hiddenDiv.style.display = "none";
+            }
+        })
+    </script>
 </body>
 </html>

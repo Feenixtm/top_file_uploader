@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Details</title>
+    <link rel="stylesheet" href="/css/output.css">
+</head>
+<body>
+    <h1>File Details</h1>
+    
+    
+
+    <% if (file.mimetype.includes("image")) { %>
+        <div class="large-avatar-circle">
+            <img class="avatar-image" src="../<%= file.path %>" alt="">
+        </div>
+    <% } %> 
+
+    <% if (file.mimetype.includes("text")) { %>
+        <svg width="94px" height="94px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V9M13 3L19 9M13 3V8C13 8.55228 13.4477 9 14 9H19M9 13H15M9 17H15" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    <% } %> 
+
+    <li>
+        <ul>File name: <%= file.filename %></ul>
+        <ul>File size: <%= file.size %></ul>
+        <ul>Mimetype: <%= file.mimetype %></ul>
+        <ul>Created At: <%= file.createdAt %></ul>
+    </li>
+    
+    <a href="/">Return to Home</a>
+</body>
+</html>

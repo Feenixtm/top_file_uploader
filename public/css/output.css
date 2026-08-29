@@ -8,6 +8,9 @@
       "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-blue-100: oklch(93.2% 0.032 255.585);
+    --color-blue-200: oklch(88.2% 0.059 254.128);
+    --color-white: #fff;
     --spacing: 0.25rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
@@ -162,11 +165,20 @@
   }
 }
 @layer utilities {
+  .block {
+    display: block;
+  }
   .flex {
     display: flex;
   }
+  .min-h-\[calc\(100vh-2\.5rem\)\] {
+    min-height: calc(100vh - 2.5rem);
+  }
   .w-fit {
     width: fit-content;
+  }
+  .w-full {
+    width: 100%;
   }
   .max-w-\[16rem\] {
     max-width: 16rem;
@@ -174,19 +186,86 @@
   .flex-col {
     flex-direction: column;
   }
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .gap-1 {
+    gap: var(--spacing);
+  }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
   }
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .bg-blue-100 {
+    background-color: var(--color-blue-100);
+  }
+  .bg-blue-200 {
+    background-color: var(--color-blue-200);
+  }
+  .bg-white {
+    background-color: var(--color-white);
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
+  }
+  .px-4 {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  .py-1 {
+    padding-block: var(--spacing);
+  }
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
+  }
+  .pt-3 {
+    padding-top: calc(var(--spacing) * 3);
+  }
+  .pb-4 {
+    padding-bottom: calc(var(--spacing) * 4);
+  }
+  .text-\[0\.75rem\] {
+    font-size: 0.75rem;
+  }
+  .text-\[1\.5rem\] {
+    font-size: 1.5rem;
+  }
+  .text-\[1\.25rem\] {
+    font-size: 1.25rem;
+  }
+  .italic {
+    font-style: italic;
+  }
+  @media (width >= 48rem) {
+    .md\:px-8 {
+      padding-inline: calc(var(--spacing) * 8);
+    }
+  }
 }
 .avatar-circle {
-  height: 4rem;
+  height: 6rem;
   aspect-ratio: 1/1;
   overflow: hidden;
-  border-radius: 100%;
+  border: 1px solid black;
+}
+.large-avatar-circle {
+  height: 12rem;
+  aspect-ratio: 1/1;
+  overflow: hidden;
   border: 1px solid black;
 }
 .avatar-image {
@@ -201,7 +280,7 @@ a {
 }
 button {
   border: 1px solid black;
-  padding: 0.25rem 1rem;
+  padding: 0.25rem 0.75rem;
 }
 button:hover {
   background-color: black;
@@ -210,6 +289,11 @@ button:hover {
 }
 input {
   border: 1px solid black;
+}
+.file-input:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
 }
 @property --tw-border-style {
   syntax: "*";

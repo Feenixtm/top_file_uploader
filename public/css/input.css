@@ -1,10 +1,16 @@
 @import "tailwindcss";
 
 .avatar-circle {
-    height: 4rem;
+    height: 6rem;
     aspect-ratio: 1/1;
     overflow: hidden;
-    border-radius: 100%;
+    border: 1px solid black;
+}
+
+.large-avatar-circle {
+    height: 12rem;
+    aspect-ratio: 1/1;
+    overflow: hidden;
     border: 1px solid black;
 }
 
@@ -22,7 +28,7 @@ a {
 
 button {
     border: 1px solid black;
-    padding: 0.25rem 1rem;
+    padding: 0.25rem 0.75rem;
 }
 
 button:hover {
@@ -33,4 +39,10 @@ button:hover {
 
 input {
     border: 1px solid black;
+}
+
+.file-input:hover { 
+    background-color: black;
+    color: white;
+    cursor: pointer;
 }

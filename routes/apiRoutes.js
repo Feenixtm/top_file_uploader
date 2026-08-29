@@ -2,33 +2,38 @@ import express from "express";
 import multer from "multer";
 const upload = multer({ dest: "uploads/"});
 import { prisma } from "../lib/prisma.js";
+import * as apiController from "../controllers/apiController.js";
 
 const apiRouter = express.Router();
-
-// GET
-
-// POST
 
 apiRouter.post("/upload", upload.single("avatar"), async (req, res, next) => {
     try {
         const file = req.file;
-        console.log(file);
+        
+        if (file) {
+            console.log(file);
 
-        const newFile = await prisma.file.create({
-            data: {
-                filename: file.originalname,
-                path: file.path,
-                mimetype: file.mimetype,
-                size: file.size,
-            }
-        })
+            const newFile = await prisma.file.create({
+                data: {
+                    filename: file.originalname,
+                    path: file.path,
+                    mimetype: file.mimetype,
+                    size: file.size,
+                }
+            });
 
-        console.log(newFile);
-
-        res.redirect('/');
+            console.log(newFile);
+            // res.redirect('/');
+        } else {
+            console.log("Nothing was uploaded to the database...");
+            return;
+        }
     } catch (error) {
         next(error);
     }
 })
 
+apiRouter.post("/delete/:cuid", apiController.deleteFile);
+
 export default apiRouter;
+
