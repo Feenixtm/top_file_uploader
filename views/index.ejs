@@ -49,7 +49,7 @@
                                         <path d="M0 1H6L9 4H16V14H0V1Z" fill="#000000"/>
                                     </svg>
                                 </div>
-                                <a href="/<%= child.parentId %>/<%= child.id %>" class="text-center text-wrap text-[0.75rem] truncate"><%= child.name %></a>
+                                <a href="/folders/<%= folder.id %>/<%= child.id %>" class="text-center text-wrap text-[0.75rem] truncate"><%= child.name %></a>
                             </div>
                         <% }) %>
                     <% } %>
@@ -60,7 +60,7 @@
                                 <div class="file-img-div">
                                     <img class="file-img" src="../<%= file.path %>" alt="">
                                 </div>
-                                <a href="/<%= folder.name %>/<%= file.id %>" class="text-[0.75rem]">View Details</a>
+                                <a href="/files/<%= file.id %>" class="text-[0.75rem]">View Details</a>
                             </div>
                         <% }) %>
                     <% } %>
