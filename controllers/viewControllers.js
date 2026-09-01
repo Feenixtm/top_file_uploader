@@ -56,17 +56,16 @@ export const getFile = async (req, res, next) => {
 
 // -------------------------------------------------
 
-export const getSubFolder = async (req, res, next) => {
+export const getFolder = async (req, res, next) => {
     try {
-        const rootFolderCUID = req.params.rootFolderCUID;
-        const subFolderCUID = req.params.subFolderCUID;
+        const parentFolderName = req.params.parentFolderName;
+        const folderName = req.params.folderName;
 
-        console.log("Root folder CUID: ", rootFolderCUID);
-        console.log("Sub folder CUID: ", subFolderCUID);
+        console.log(parentFolderName);
 
-        const subFolder = await prisma.folder.findUnique({
+        const subFolder = await prisma.folder.findFirst({
             where: {
-                id: subFolderCUID
+                name: folderName
             },
             include: {
                 parent: true,
@@ -74,7 +73,7 @@ export const getSubFolder = async (req, res, next) => {
             }
         })
 
-        res.render("index", { user: req.user, folder: subFolder });
+        res.render("index", { user: req.user, parentFolderName: parentFolderName, folder: subFolder });
     } catch (error) {
         next(error);
     }

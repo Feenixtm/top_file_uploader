@@ -36,7 +36,21 @@
                         <svg width="20px" height="20px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 1H6L9 4H16V14H0V1Z" fill="#000000"/>
                         </svg>
-                        <h1><%= folder.name %></h1>
+
+                        <h1>
+                            /
+                            <% if (locals.parentFolderName) { %>
+                                <a href="/">
+                                    <%= parentFolderName %>
+                                </a>
+                                /
+                                <a href="/folders/<%= parentFolderName %>/<%= folder.name %>">
+                                    <%= folder.name %>
+                                </a>
+                            <% } else { %>
+                                <%= folder.name %>
+                            <% } %> 
+                        </h1>
                     </div>
                 <% } %>
 
@@ -49,7 +63,7 @@
                                         <path d="M0 1H6L9 4H16V14H0V1Z" fill="#000000"/>
                                     </svg>
                                 </div>
-                                <a href="/folders/<%= folder.id %>/<%= child.id %>" class="text-center text-wrap text-[0.75rem] truncate"><%= child.name %></a>
+                                <a href="/folders/<%= folder.name %>/<%= child.name %>" class="text-center text-wrap text-[0.75rem] truncate"><%= child.name %></a>
                             </div>
                         <% }) %>
                     <% } %>
