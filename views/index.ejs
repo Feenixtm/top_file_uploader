@@ -72,7 +72,11 @@
                         <% folder.files.map((file, index) => { %>
                             <div class="flex flex-col justify-center items-center px-2 pt-2 pb-4 bg-blue-400">
                                 <div class="file-img-div">
-                                    <img class="file-img" src="../<%= file.path %>" alt="">
+                                    <% if (locals.parentFolderName) { %>
+                                        <img class="file-img" src="../../<%= file.path %>" alt="">
+                                    <% } else { %>
+                                        <img class="file-img" src="../<%= file.path %>" alt="">
+                                    <% } %> 
                                 </div>
                                 <a href="/files/<%= file.id %>" class="text-[0.75rem]">View Details</a>
                             </div>

@@ -18,7 +18,7 @@ export const getIndex = async (req, res, next) => {
 
             console.log(folder);
 
-            res.render("index", { user: req.user, folder: folder });
+            res.render("index", { user: req.user, folder: folder, currentPath: req.originalUrl });
         } else {
             res.render("index", { user: req.user });
         }
@@ -69,11 +69,18 @@ export const getFolder = async (req, res, next) => {
             },
             include: {
                 parent: true,
-                children: true
+                children: true,
+                files: true
             }
-        })
+        });
 
-        res.render("index", { user: req.user, parentFolderName: parentFolderName, folder: subFolder });
+        console.log(subFolder);
+
+        // --------------------
+
+        // --------------------
+
+        res.render("index", { user: req.user, parentFolderName: parentFolderName, folder: subFolder, currentPath: req.originalUrl });
     } catch (error) {
         next(error);
     }
