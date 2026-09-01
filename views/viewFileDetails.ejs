@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/output.css">
+</head>
+<body>
+    <main class="flex flex-col gap-2 p-4 bg-blue-100 h-[calc(100vh)]">
+        <h1 class="text-[1.25rem] font-semibold">
+            File Name: <%= file.filename %>
+        </h1>
+
+        <% if (file.mimetype.includes("image")) { %>
+            <div class="max-h-[36rem]">
+                <img class="h-full" src="../<%= file.path %>" alt="">
+            </div>
+        <% } %> 
+
+        <li>
+            <ul>File Size: <%= file.size %> KB</ul>
+            <ul>Mimetype: <%= file.mimetype %></ul>
+            <ul>Date Created: <%= file.createdAt.toISOString().slice(0, 10) %></ul>
+        </li>
+        
+        <a href="/">Return to Home</a>
+    </main>
+</body>
+</html>

@@ -5,14 +5,39 @@ export const postSignUp = async (req, res, next) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-        await prisma.user.create({
-            data: {
-                username: req.body.username,
-                password: hashedPassword
+        // See if a user with this username already exists
+        const existingUser = await prisma.user.findUnique({
+            where: {
+                username: req.body.username
             }
         });
 
-        res.redirect("/");
+        if (existingUser) {
+            console.log("Please sign up with a different username...");
+            return;
+        } else if (!existingUser) {
+            const newUser = await prisma.user.create({
+                data: {
+                    username: req.body.username,
+                    password: hashedPassword
+                }
+            });
+
+            console.log(newUser);
+
+            await prisma.folder.create({
+                data: {
+                    name: "My Documents",
+                    userId: newUser.id
+                }
+            });
+
+            res.redirect("/");
+        }
+
+        
+
+        
     } catch (error) {
         return next(error);
     }

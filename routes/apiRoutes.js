@@ -9,6 +9,9 @@ const apiRouter = express.Router();
 apiRouter.post("/upload", upload.single("avatar"), async (req, res, next) => {
     try {
         const file = req.file;
+        const folderId = req.body.cuid;
+
+        console.log("folderId:", + folderId);
         
         if (file) {
             console.log(file);
@@ -19,11 +22,12 @@ apiRouter.post("/upload", upload.single("avatar"), async (req, res, next) => {
                     path: file.path,
                     mimetype: file.mimetype,
                     size: file.size,
+                    folderId: folderId
                 }
             });
 
             console.log(newFile);
-            // res.redirect('/');
+            res.redirect('/');
         } else {
             console.log("Nothing was uploaded to the database...");
             return;
@@ -34,6 +38,8 @@ apiRouter.post("/upload", upload.single("avatar"), async (req, res, next) => {
 })
 
 apiRouter.post("/delete/:cuid", apiController.deleteFile);
+
+apiRouter.post("/create-folder", apiController.createFolder);
 
 export default apiRouter;
 

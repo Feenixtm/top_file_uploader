@@ -8,6 +8,8 @@ viewRouter.get("/", viewController.getIndex);
 
 viewRouter.get("/login", viewController.getLogin);
 viewRouter.get("/sign-up", viewController.getSignUp);
-viewRouter.get("/file/:cuid", viewController.getFile);
+viewRouter.get("/:folderName/:fileId", viewController.getFile);
+
+viewRouter.get("/:rootFolderCUID/:subFolderCUID", viewController.getSubFolder);
 
 export default viewRouter;
