@@ -22,6 +22,8 @@ export const createFolder = async (req, res, next) => {
         const rootFolderCUID = req.body.rootFolderCUID;
         const userId = Number(req.body.userId);
 
+        const currentPath = req.body.currentPath;
+
         // console.log(folderName);
         // console.log(rootFolderCUID);
         // console.log(userId);
@@ -36,7 +38,7 @@ export const createFolder = async (req, res, next) => {
 
         console.log(newSubFolder);
 
-        res.redirect("/");
+        res.redirect(currentPath);
     } catch (error) {
         next(error);
     }

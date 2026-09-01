@@ -104,6 +104,7 @@
                     <div class="flex gap-2 items-center">
                         <label for="">Folder Name:</label>
                         <input type="hidden" name="userId" value="<%= user.id %>">
+                        <input type="hidden" name="currentPath" value="<%= currentPath %>">
                         <input type="text" name="folderName" class="py-1">
                     </div>
 
@@ -125,7 +126,9 @@
             } else {
                 hiddenDiv.style.display = "none";
             }
-        })
+        });
+
+        const currentPath = widnow.location.pathname;
     </script>
 </body>
 </html>
