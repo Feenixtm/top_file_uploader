@@ -24,6 +24,9 @@
             <ul>Date Created: <%= file.createdAt.toISOString().slice(0, 10) %></ul>
         </li>
         
+        <form action="/api/delete-file/<%= file.id %>" method="POST">
+            <button type="submit">DELETE FILE</button>
+        </form>
         <a href="/">Return to Home</a>
     </main>
 </body>
