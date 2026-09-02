@@ -27,7 +27,10 @@ apiRouter.post("/upload", upload.single("avatar"), async (req, res, next) => {
             });
 
             console.log(newFile);
-            res.redirect('/');
+            
+            const currentPath = req.body.currentPath;
+            
+            res.redirect(currentPath);
         } else {
             console.log("Nothing was uploaded to the database...");
             return;
