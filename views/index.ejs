@@ -38,18 +38,20 @@
                         </svg>
 
                         <h1>
-                            /
-                            <% if (locals.parentFolderName) { %>
-                                <a href="/">
-                                    <%= parentFolderName %>
-                                </a>
-                                /
-                                <a href="/folders/<%= parentFolderName %>/<%= folder.name %>">
-                                    <%= folder.name %>
-                                </a>
-                            <% } else { %>
-                                <%= folder.name %>
+
+
+
+                            <% if (locals.parentFolder) { %>
+                                
+                                <% if (parentFolder.parentId !== null) { %>
+                                    <a href="/">..</a>/<a href="/folders/<%= parentFolder.name %>"><%= parentFolder.name %></a>
+                                <% } else { %>
+                                    /<a href="/">My Documents</a>
+                                <% } %>
+
                             <% } %> 
+
+                            /<span><%= folder.name %></span>
                         </h1>
                     </div>
                 <% } %>
@@ -63,7 +65,7 @@
                                         <path d="M0 1H6L9 4H16V14H0V1Z" fill="#000000"/>
                                     </svg>
                                 </div>
-                                <a href="/folders/<%= folder.name %>/<%= child.name %>" class="text-center text-wrap text-[0.75rem] truncate"><%= child.name %></a>
+                                <a href="/folders/<%= child.name %>" class="text-center text-wrap text-[0.75rem] truncate"><%= child.name %></a>
                             </div>
                         <% }) %>
                     <% } %>
@@ -72,7 +74,7 @@
                         <% folder.files.map((file, index) => { %>
                             <div class="flex flex-col justify-center items-center px-2 pt-2 pb-4 bg-blue-400">
                                 <div class="file-img-div">
-                                    <% if (locals.parentFolderName) { %>
+                                    <% if (locals.parentFolder) { %>
                                         <img class="file-img" src="../../<%= file.path %>" alt="">
                                     <% } else { %>
                                         <img class="file-img" src="../<%= file.path %>" alt="">

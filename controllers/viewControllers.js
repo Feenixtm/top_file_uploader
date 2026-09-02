@@ -58,10 +58,7 @@ export const getFile = async (req, res, next) => {
 
 export const getFolder = async (req, res, next) => {
     try {
-        const parentFolderName = req.params.parentFolderName;
         const folderName = req.params.folderName;
-
-        console.log(parentFolderName);
 
         const subFolder = await prisma.folder.findFirst({
             where: {
@@ -74,13 +71,17 @@ export const getFolder = async (req, res, next) => {
             }
         });
 
+        console.log("Sub Folder: ");
         console.log(subFolder);
 
-        // --------------------
+        // -----------------------------------------
+        // Check if Parent folder also has a parent.
 
-        // --------------------
+        
 
-        res.render("index", { user: req.user, parentFolderName: parentFolderName, folder: subFolder, currentPath: req.originalUrl });
+        // -----------------------------------------
+
+        res.render("index", { user: req.user, parentFolder: subFolder.parent, folder: subFolder, currentPath: req.originalUrl });
     } catch (error) {
         next(error);
     }

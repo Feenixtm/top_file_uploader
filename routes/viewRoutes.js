@@ -10,6 +10,6 @@ viewRouter.get("/login", viewController.getLogin);
 viewRouter.get("/sign-up", viewController.getSignUp);
 viewRouter.get("/files/:fileId", viewController.getFile);
 
-viewRouter.get("/folders/:parentFolderName/:folderName", viewController.getFolder);
+viewRouter.get("/folders/:folderName", viewController.getFolder);
 
 export default viewRouter;
