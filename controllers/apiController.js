@@ -1,21 +1,5 @@
 import { prisma } from "../lib/prisma.js";
 
-export const deleteFile = async (req, res, next) => {
-    try {
-        const cuid = req.params.cuid;
-
-        await prisma.file.delete({
-            where: {
-                id: cuid
-            }
-        });
-
-        res.redirect("/");
-    } catch (error) {
-        next(error);
-    }
-}
-
 export const createFolder = async (req, res, next) => {
     try {
         const folderName = req.body.folderName;
@@ -65,3 +49,41 @@ export const createSubFolder = async (req, res, next) => {
         next(error);
     }
 }
+
+// --------------------------------------------------------
+
+// DELETE APIs BELOW
+
+// --------------------------------------------------------
+
+export const deleteFile = async (req, res, next) => {
+    try {
+        const cuid = req.params.cuid;
+
+        await prisma.file.delete({
+            where: {
+                id: cuid
+            }
+        });
+
+        res.redirect("/");
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const deleteFolder = async (req, res, next) => {
+    try {
+        const cuid = req.params.cuid;
+
+        await prisma.folder.delete({
+            where: {
+                id: cuid
+            }
+        });
+
+        res.redirect("/")
+    } catch (error) {
+        next(error);
+    }
+};

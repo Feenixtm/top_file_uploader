@@ -71,17 +71,16 @@ export const getFolder = async (req, res, next) => {
             }
         });
 
-        console.log("Sub Folder: ");
-        console.log(subFolder);
+        if (subFolder !== null) {
+            console.log("Sub Folder: ");
+            console.log(subFolder);
 
-        // -----------------------------------------
-        // Check if Parent folder also has a parent.
-
+            res.render("index", { user: req.user, folder: subFolder, parentFolder: subFolder.parent, currentPath: req.originalUrl });
+        } else {
+            console.log("Sub folder could not be retrieved...");
+            res.redirect("/");
+        }
         
-
-        // -----------------------------------------
-
-        res.render("index", { user: req.user, parentFolder: subFolder.parent, folder: subFolder, currentPath: req.originalUrl });
     } catch (error) {
         next(error);
     }

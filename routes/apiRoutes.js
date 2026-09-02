@@ -40,9 +40,11 @@ apiRouter.post("/upload", upload.single("avatar"), async (req, res, next) => {
     }
 })
 
-apiRouter.post("/delete/:cuid", apiController.deleteFile);
-
 apiRouter.post("/create-folder", apiController.createFolder);
+
+apiRouter.post("/delete-file/:cuid", apiController.deleteFile);
+apiRouter.post("/delete-folder/:cuid", apiController.deleteFolder);
+
 
 export default apiRouter;
 

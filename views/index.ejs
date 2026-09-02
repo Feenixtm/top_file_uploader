@@ -31,30 +31,38 @@
 
             <div class="flex flex-col gap-4 p-4 bg-blue-200">
                 
-                <% if (locals.folder) { %>
-                    <div class="flex gap-2 items-center">
-                        <svg width="20px" height="20px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 1H6L9 4H16V14H0V1Z" fill="#000000"/>
-                        </svg>
+                <div class="flex justify-between">
+                    <% if (locals.folder) { %>
+                        <div class="flex gap-2 items-center">
+                            <svg width="20px" height="20px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 1H6L9 4H16V14H0V1Z" fill="#000000"/>
+                            </svg>
 
-                        <h1>
+                            <h1>
 
 
 
-                            <% if (locals.parentFolder) { %>
-                                
-                                <% if (parentFolder.parentId !== null) { %>
-                                    <a href="/">..</a>/<a href="/folders/<%= parentFolder.name %>"><%= parentFolder.name %></a>
-                                <% } else { %>
-                                    /<a href="/">My Documents</a>
-                                <% } %>
+                                <% if (locals.parentFolder) { %>
+                                    
+                                    <% if (parentFolder.parentId !== null) { %>
+                                        <a href="/">..</a>/<a href="/folders/<%= parentFolder.name %>"><%= parentFolder.name %></a>
+                                    <% } else { %>
+                                        /<a href="/">My Documents</a>
+                                    <% } %>
 
-                            <% } %> 
+                                <% } %> 
 
-                            /<span><%= folder.name %></span>
-                        </h1>
-                    </div>
-                <% } %>
+                                /<span><%= folder.name %></span>
+                            </h1>
+                        </div>
+                    <% } %>
+
+                    <% if (locals.folder && folder.parentId !== null) { %>
+                        <form action="/api/delete-folder/<%= folder.id %>" method="POST">
+                            <button type="submit">DELETE CURRENT DIRECTORY</button>
+                        </form>
+                    <% } %>
+                </div>
 
                 <div class="flex flex-wrap gap-2 p-4 bg-blue-300">
                     <% if (folder && folder.children) { %>
